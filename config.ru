@@ -5,6 +5,10 @@ Bundler.require
 require_relative 'app'
 require_relative 'middleware/auth_middleware'
 require 'sidekiq/web'
+require 'rack'
+require 'rack/static'
+require_relative 'middleware/error_handler'
+require_relative 'middleware/request_logger'
 
 # Serve static files with appropriate caching rules
 use Rack::Static, {
@@ -23,6 +27,7 @@ use Rack::Static, {
   ]
 }
 
+use RequestLogger
 use Rack::CommonLogger
 use Rack::Deflater
 
@@ -36,4 +41,5 @@ map '/sidekiq' do
 end
 
 use AuthMiddleware
+use ErrorHandler
 run App.new

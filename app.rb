@@ -19,10 +19,6 @@ class App
     path = request.path
     method = request.request_method
 
-    puts "\n=== ROUTING DEBUG ==="
-    puts "Handling request - Method: #{method}, Path: #{path}"
-    puts "Case comparison: [#{method}, #{path}]"
-
     case [method, path]
     when ['POST', '/register']
       puts "Matched register route"

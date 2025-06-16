@@ -11,8 +11,8 @@ A Ruby-based API service with authentication and product management.
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd charlab-entrevista-fudo
+git clone https://github.com/lucascharlab/charlab-fudo
+cd charlab-fudo
 ```
 
 2. Start the services:
