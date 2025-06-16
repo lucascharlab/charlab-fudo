@@ -1,0 +1,28 @@
+services:
+  web:
+    build: .
+    ports:
+      - "9292:9292"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    tty: true
+    stdin_open: true
+
+  sidekiq:
+    build: .
+    command: bundle _2.4.22_ exec sidekiq -r ./config/initializers/sidekiq.rb
+    depends_on:
+      - redis
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - .:/app
+    tty: true
+    stdin_open: true
+
+  redis:
+    image: redis:7.0
+    ports:
+      - "6379:6379" 
